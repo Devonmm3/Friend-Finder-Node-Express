@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -155,6 +155,8 @@
                                 <option value="4">5</option>
                                 <option value="5">5 (Strongly Agree)</option>
                             </select>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Submit</button>
 
                         </form>
                     </div>
@@ -162,7 +164,75 @@
                 </div>
             </div>
         </div>
+
+        <div id="modalResultOff" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">X</button>
+                        <h2 class="modal-header"><strong>Here is your most compatible friend</strong></h2>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="yourMatchName"></h2>
+                        <img id="yourMatchImg" src="" alt="" height="350" width="250">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="close" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="strong"><a href="/api/friends">API Friends Link</a> |
+                    <a href=""></a>
+                </p>
+            </div>
+        </footer>
     </div>
+
+    <script scr=font ??></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script>
+        var websiteURL = window.location.origin;
+
+        $("#submit").on("click", function () {
+            if (($("name").val().trim() !== "") && ($("#picture").val().trim() !== "")) {
+                var friendInfoData = {
+                    name: $("#name").val(),
+                    picture: $("#picture").val(),
+                    points: [$("q1").val(), $("q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(),
+                        $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(),
+                    ]
+                }
+
+                $.post(websiteURL + "/api/friends", friendInfoData, function (data) {
+                    $("#yourMatchName").html(data.name);
+                    $("#yourMatchImg").attr("src", data.photo);
+
+                    $("#modalResultOff").modal("toggle");
+                    //clear form
+                    $("#name").val('');
+                    $("picture").val("");
+                });
+            } else {
+                $(".modal-header").html("Need all required information to proceed and see match");
+                $(".modal-body").html("Complete all the needed information in the form in order to submit");
+                $("#modalResultsOff").html("toggle");
+            }
+            return false;
+        });
+
+        $("#close").click(function () {
+            $.get("/", function (req, res) {
+                location.replace(res);
+            });
+        });
+    </script>
 
 </body>
 
