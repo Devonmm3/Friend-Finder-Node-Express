@@ -1,5 +1,5 @@
 {
-  "name": "Friend-Finder-Node-Express",
+  "name": "friendfindernodeexpress",
   "version": "1.0.0",
   "description": "helps friends connect",
   "main": "server.js",
