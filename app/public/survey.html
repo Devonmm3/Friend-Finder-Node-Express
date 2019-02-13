@@ -166,7 +166,7 @@
             </div>
         </div>
 
-        <div id="modalResultOff" class="modal fade" role="dialog">
+        <div id="modalResults" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -186,13 +186,13 @@
         <footer class="footer">
             <div class="container">
                 <p class="strong"><a href="/api/friends">API Friends Link</a> |
-                    <a href=""></a>
+                    <a href="https://github.com/Devonmm3/Friend-Finder-Node-Express"></a>
                 </p>
             </div>
         </footer>
     </div>
 
-    <script scr=font ??></script>
+    <!-- <script scr=font ??></script> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
@@ -215,20 +215,20 @@
                     $("#yourMatchName").html(data.name);
                     $("#yourMatchImg").attr("src", data.photo);
 
-                    $("#modalResultOff").modal("toggle");
+                    $("#modalResult").modal("toggle");
                     //clear form
                     $("#name").val('');
                     $("picture").val("");
                 });
             } else {
-                $(".modal-header").html("Need all required information to proceed and see match");
+                $(".modal-title").html("Need all required information to proceed and see match");
                 $(".modal-body").html("Complete all the needed information in the form in order to submit");
-                $("#modalResultsOff").html("toggle");
+                $("#modalResults").html("toggle");
             }
             return false;
         });
 
-        $("#close").click(function () {
+        $("#closeModel").click(function () {
             $.get("/", function (req, res) {
                 location.replace(res);
             });

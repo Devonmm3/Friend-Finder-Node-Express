@@ -1,9 +1,14 @@
-var friends = require("..app/data/friends.js");
+var friends = require("../data/friends.js");
 
 module.exports = function (app) {
     app.get("/api/friends", function (req, res) {
-        //this var is the user filling out the survery
+        res.json(friends);
+    });
+    //this var is the user filling out the survery
+    app.post("/api/friends", function (req, res) {
+
         var userAsFriend = req.body;
+        console.log("this is a friend" + req.body)
 
         var highestMatch = {};
 
